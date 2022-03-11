@@ -31,22 +31,21 @@ em = Image.open('../base_e.png') #emissive background
 item_list = os.listdir() #get list of all files in the item_old directory
 
 for i in range(0,len(item_list)): #loop through all files
-    try: 
-        #opening images 
-        im_item = Image.open(str(item_list[i])).convert('RGBA')
-        new1 = Image.alpha_composite(src,im_item) #merge em
-        new1.save('../' + str(output_dir) + '/compacted_' + str(item_list[i]))
-        em.save('../' + str(output_dir) + '/compacted_' + item_list[i].split('.')[0]+ '_e.png')
-        
-        #now .properties file contents
-        f = open('../' + str(output_dir) + '/' + str(item_list[i].split('.')[0]) + '.properties','w')
-        f.write('type=item\n')
-        f.write('matchItems=' + str(item_list[i].split('.')[0])+ '\n')
-        f.write('texture=compacted/compacted_' + str(item_list[i].split('.')[0])+ '\n')
-        f.write('nbt.display.Lore.*=Compacted Item'+ '\n') #change if lore in game is different
-        f.close()
-    except:
-        print(str(item_list[i]) + ' error')  #no I don't care about having good error handling
+
+    #opening images 
+    im_item = Image.open(str(item_list[i])).convert('RGBA')
+    new1 = Image.alpha_composite(src,im_item) #merge em
+    new1.save('../' + str(output_dir) + '/compacted_' + str(item_list[i]))
+    em.save('../' + str(output_dir) + '/compacted_' + item_list[i].split('.')[0]+ '_e.png')
+
+    #now .properties file contents
+    f = open('../' + str(output_dir) + '/' + str(item_list[i].split('.')[0]) + '.properties','w')
+    f.write('type=item\n')
+    f.write('matchItems=' + str(item_list[i].split('.')[0])+ '\n')
+    f.write('texture=compacted/compacted_' + str(item_list[i].split('.')[0])+ '\n')
+    f.write('nbt.display.Lore.*=Compacted Item'+ '\n') #change if lore in game is different
+    f.close()
+
 
 #blocks
 #more complicated
